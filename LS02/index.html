@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The Second homework</title>
+</head>
+<style type="text/css">
+    #canvas{
+        margin-left: 25%;
+
+    }
+</style>
+<body>
+    <div>
+        <canvas id="canvas" width="1000" height="900" style="border:3px solid grey">
+            Your browser does not support the HTML 5 Canvas.
+        </canvas>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        canvasApp();
+    }
+    function canvasApp() {
+                var theCanvas = document.getElementById('canvas');
+                var context = theCanvas.getContext('2d');
+                
+                
+                context.lineWidth = 3;             
+                context.strokeStyle='blue';               
+                // context.arc(100, 100, 50, Math.PI , Math.PI*1.5);
+                // context.stroke();
+                // context.beginPath();
+                // context.arc(100, 100, 50, 0 , Math.PI*0.5);
+                // context.stroke();
+                // context.arcTo(300, 400, 300, 300, 100);
+                // context.stroke();
+
+            
+                // context.moveTo(1000, 900);
+                // context.quadraticCurveTo(800,450,280,100);
+                // context.stroke();
+
+                //自制五边形接口：(x,y表示起始点，m表示顶点距离矩形上边的距离，w表示五边形下面矩形边的宽，h则是高)
+
+                 CanvasRenderingContext2D.prototype.pentagon = function (x1,y1,x2,y2,x3,y3,x4,y4) {
+                        this.moveTo(x1,y1);
+                        this.lineTo(x2,y2);
+                        this.lineTo(x3,y3);
+                        this.lineTo(x4,y4);
+                        this.closePath();                       
+                        this.stroke();
+        }
+                    context.pentagon(100,100,40,60,60,60,50,50);
+                    
+                
+
+                    context.pentagon(500,450,100,200,200)
+                
+                
+
+               
+        }
+
+                
+                
+                
+                
+                
+                
+                
+                
+
+                
+                
+                
+                
+
+                
+
+    
+    </script>
+
+</html>

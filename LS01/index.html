@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>The first homework</title>
+</head>
+<style type="text/css">
+    #canvas{
+        margin-left: 25%;
+
+    }
+</style>
+<body>
+    <div>
+        <canvas id="canvas" width="1000" height="900" style="border:3px solid grey">
+            Your browser does not support the HTML 5 Canvas.
+        </canvas>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        canvasApp();
+    }
+    function canvasApp() {
+                var theCanvas = document.getElementById('canvas');
+                var context = theCanvas.getContext('2d');
+                
+                
+                context.lineWidth = 3;
+                context.fillStyle='red';
+                context.moveTo(0, 0);
+                context.lineTo(250, 225);
+                context.lineTo(0, 225);
+                context.closePath();
+                context.fill();
+
+
+                context.fillStyle='yellow';
+                context.beginPath();
+                context.moveTo(250, 225);
+                context.lineTo(500, 450);
+                context.lineTo(250,450 );
+                context.closePath();
+                context.fill();
+
+                context.fillStyle='blue';
+                context.beginPath();
+                context.moveTo(500, 450);
+                context.lineTo(750, 675);
+                context.lineTo(500,675 );
+                context.closePath();
+                context.fill();
+               
+       
+                context.fillStyle='green';
+                context.beginPath();
+                context.moveTo(750, 675);
+                context.lineTo(1000, 900);
+                context.lineTo(750,900 );
+                context.closePath();
+                context.fill();
+
+
+                
+
+
+
+
+                
+                
+                
+
+               
+        }
+
+                
+                
+                
+                
+                
+                
+                
+                
+
+                
+                
+                
+                
+
+                
+
+    
+    </script>
+
+</html>
