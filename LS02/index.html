@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>The Second homework</title>
+    <title>第二次作业复习</title>
 </head>
 <style type="text/css">
     #canvas{
@@ -29,39 +29,218 @@
                 
                 
                 context.lineWidth = 3;             
-                context.strokeStyle='blue';               
-                // context.arc(100, 100, 50, Math.PI , Math.PI*1.5);
-                // context.stroke();
-                // context.beginPath();
-                // context.arc(100, 100, 50, 0 , Math.PI*0.5);
-                // context.stroke();
-                // context.arcTo(300, 400, 300, 300, 100);
-                // context.stroke();
+                context.strokeStyle='blue'; 
+            //绘制圆（圆形位置，半径，起始和终止角度，false表示顺时针，true表示逆时针,默认是false也就是顺时针，角度按照0,0.5,1,1.5,2等顺序走）              
+                context.arc(100, 100, 50, Math.PI , Math.PI*1.5);
+                context.stroke();
+                context.beginPath();
+                context.arc(100, 100, 50, Math.PI*0.5, 0,true);
+                context.stroke();
 
-            
-                // context.moveTo(1000, 900);
-                // context.quadraticCurveTo(800,450,280,100);
-                // context.stroke();
+            //绘制弧线(x1,y1代表改变点的坐标，x2,y2终点坐标)context.arcTo( x1 , y1 , x2 , y2 , radius )；
+                context.beginPath();
+                context.moveTo(200, 200);
+                context.arcTo(300, 300,100, 600, 100);
+                context.closePath();
+                context.fillStyle="red";
+                context.stroke();
+                context.fill();
+            //Canvas曲线相关绘制(绘制二次曲线)
+            //context.moveTo( x0 , y0 );
+            //context.quadraticCurveTo(x1, y1, x2, y2 );  
+			            	            //控制点        
+			           	                        //结束点
+                context.beginPath();
+                context.moveTo(400, 400);
+                context.quadraticCurveTo(800,450,280,100);
+                context.closePath();
+                context.fillStyle="yellow";
+                context.stroke();
+                context.fill();
+            //Canvas曲线相关绘制（绘制贝塞尔曲线）
+            //context.bezierCurveTo( x1, y1, x2, y2,x3, y3);
+			 		                //控制点
+			   		                        //控制点
+                          	                        //结束点
+                context.beginPath();                                        
+                context.moveTo(500, 500);
+                context.bezierCurveTo(300,200,500,600,300,690)
+                context.closePath();
+                context.fillStyle="blue";
+                context.stroke();
+                context.fill();
 
-                //自制五边形接口：(x,y表示起始点，m表示顶点距离矩形上边的距离，w表示五边形下面矩形边的宽，h则是高)
+            //绘制椭圆：//x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise(默认为false)
+            //ctx.ellipse(100, 100, 50, 75, 45 * Math.PI/180, 0, 2 * Math.PI); //倾斜45°角ctx.stroke();
+                function drawEllipse(ctx) {
+                ctx.save();
+                ctx.strokeStyle = 'red';
+                ctx.lineWidth = 10;
+                ctx.beginPath();
+            //x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise(默认为false)
+                 ctx.ellipse(600, 600, 50, 75, 0, 0, 2 * Math.PI,false); //
+            // ctx.ellipse(100, 100, 50, 75, 45 * Math.PI / 180, 0, 2 * Math.PI); //倾斜45°角ctx.stroke();
+                ctx.stroke();
+                ctx.restore();
 
-                 CanvasRenderingContext2D.prototype.pentagon = function (x1,y1,x2,y2,x3,y3,x4,y4) {
+        }
+        drawEllipse(context);
+         //自制五边形接口：
+                 CanvasRenderingContext2D.prototype.pentagon = function (x1,y1,x2,y2,x3,y3,x4,y4,x5,y5) {
                         this.moveTo(x1,y1);
                         this.lineTo(x2,y2);
                         this.lineTo(x3,y3);
                         this.lineTo(x4,y4);
+                        this.lineTo(x5,y5);
                         this.closePath();                       
                         this.stroke();
         }
-                    context.pentagon(100,100,40,60,60,60,50,50);
-                    
+        // context.pentagon(输入对应参数);  
                 
+        // hsl( 20 , 62% , 28% )、  H: Hue 色相   S：Saturation 饱和度  L Lightness 明度
+        //线性渐变和径向渐变的方法
+           //调用线性渐变 
+            linearGradient();
+            //调用径向渐变
+            radialGradient();
+            //context.createRadialGradient(x0 , y0 , r0 , x1 , y1 , r1 );
 
-                    context.pentagon(500,450,100,200,200)
-                
-                
+            function linearGradient() {
+                var gr = context.createLinearGradient(0,500, 300, 250);
+                context.lineWidth = 5;
+                gr.addColorStop(0, 'rgb(255,0,0)');
+                gr.addColorStop(0.5, 'rgb(0,255,0)');
+                gr.addColorStop(1, 'rgb(255,0,0)');
 
-               
+                // Use the gradient for the fillStyle.
+                context.strokeStyle = gr;
+                context.strokeRect(0, 500, 100, 100);
+
+                var gr = context.createLinearGradient(200, 200, 300, 300);
+                gr.addColorStop(0, 'rgb(255,0,0)');
+                gr.addColorStop(1, 'rgb(0,255,0)');
+                context.fillStyle = gr;
+                // context.fillRect(200 + 20, 200 + 20, 100 - 40, 100 - 40);
+                // context.strokeRect(200, 300, 50, 100);
+                // context.strokeRect(200, 400, 200, 100);
+            }
+            function radialGradient() {
+                var gr = context.createRadialGradient(50, 50, 25, 100, 100, 100);
+                gr.addColorStop(0, 'rgb(255,0,0)');
+                gr.addColorStop(0.5, 'rgb(0,255,0)');
+                gr.addColorStop(1, 'rgb(255,0,0)');
+                context.fillStyle = gr;
+                // context.fillRect(0, 0, 200, 200);
+
+                // context.arc(600, 600, 100, (Math.PI / 180) * 0, (Math.PI / 180) * 360, false);
+                context.fill();
+
+                context.strokeStyle = gr;
+                // context.arc(600, 600, 50, (Math.PI / 180) * 0, (Math.PI / 180) * 360, false);
+                context.stroke();
+
+                //阴影设置参数 context.shadowColor context.shadowOffSetX context.shadowOffSetY context.shadowBlur
+                context.shadowOffsetX = 4;
+                context.shadowOffsetY = 4;
+                context.shadowColor = 'black';
+                context.shadowBlur = 4;
+                context.fillRect(10, 10, 100, 100);
+
+                context.shadowOffsetX = -4;
+                context.shadowOffsetY = -4;
+                context.shadowColor = 'rgb(0,0,255)';
+                context.shadowBlur = 4;
+                context.fillRect(150, 10, 100, 100);
+           
+           
+            //Canvas图像合成中globalAlpha代表全局透明度，其值默认为1
+            //全局图像混合设置globleCompositeOperation默认值为source-over
+            //图像混合类型－source-over、source-atop、source-in、source-out－destination-over、destination-atop、destination-in、destination-out－lighter、copy、xor
+            //平移(translate),旋转(rotate),缩放(scale)
+            //矩阵变换（transform ) a 水平缩放（1） b 水平倾斜（0）c 垂直倾斜（0）d 垂直缩放（1）e 水平位移（0）f 垂直位移（0）
+            //矩阵变换方法 transform( a , b , c , d , e , f )   是对当前坐标系进行变换， setTransform( a , b , c , d , e , f )  是对默认坐标系进行变换，忽略之前的级联变换
+           
+            //canvas文本 
+            //文本对齐
+            //文本水平对齐 context.textAlign＝left ｜center｜right
+            //文本垂直对齐－context.textBaseline＝ top｜middle｜bottom－context.textBaseline＝ alphabetic（default）｜ideographic（汉字等方块字体）
+            //文本度量－context.measureText( string ).width
+            context.textAlign='right';
+            context.font='bold 30px 楷体';
+            context.fillText('canvas文本', 700, 700, 200);
+            context.strokeText('canvas文本', 700, 700, 200 );
+
+           //canvas剪切:Canvas剪切方法与剪切路径－绘制路径后使用context.clip( )剪切- 剪切后，新绘制的图形将限定在此剪切区域
+           // 剪切与状态的关系- 有时可能需要取消或者新定义裁切区- 构建剪切区前可先保存状态（save）- 存储后，再绘制的图形将限定在裁剪区域内- 完成剪切区内的绘制后可进行状态恢复（restore）
+           // 非零环绕原则
+ 
+           
+
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+           
+            }      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
                 
